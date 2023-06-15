@@ -9,32 +9,27 @@ import java.util.List;
 public interface ICabinetService {
     List<Patient> getAllPatients();
 
-    List<Patient> searchByQuery(String query);
+    List<Patient> searchPatientsByQuery(String query);
 
     void addPatient(Patient patient);
 
     void deletePatientById(Long id);
 
-    List<Consultation> getConsultationsByPatient(Patient patient);
-
     void addMedecin(Medecin medecin);
 
     List<Medecin> getAllMedecins();
 
-    void deleteMedecinById(Long id);
+    abstract List<Medecin> searchMedecinsByQuery(String query);
 
-    List<Consultation> getConsultationsByMedecin(Medecin medecin);
+    void deleteMedecinById(Long id);
 
     void addConsultation(Consultation consultation);
 
-    List<Consultation> getAllConsultations();
-
-    void deleteConsultation(Consultation consultation);
+    void deleteConsultationById(Long id);
 
     Medecin getMedecinById(Long id);
 
     Patient getPatientById(Long id);
 
-    Consultation getConsultationById(Long id);
-
+    List<Consultation> searchConsultationsByMedecin(String mc);
 }

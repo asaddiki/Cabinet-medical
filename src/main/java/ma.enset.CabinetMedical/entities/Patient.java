@@ -1,6 +1,7 @@
 package ma.enset.CabinetMedical.entities;
 
 import lombok.*;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.util.Collection;
@@ -18,12 +19,12 @@ public class Patient {
     private Long id;
     @NonNull
     private String nom;
-    @NonNull
+    @Column(length = 100)
     private String prenom;
-    @NonNull
     private String cin;
     private String tel;
     private String email;
+    @DateTimeFormat(pattern = "yyyy-mm-dd")
     @Temporal(TemporalType.DATE)
     private Date dateNaissance;
 

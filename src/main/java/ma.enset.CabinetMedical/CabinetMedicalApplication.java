@@ -1,6 +1,5 @@
 package ma.enset.CabinetMedical;
 
-import ma.enset.CabinetMedical.entities.Consultation;
 import ma.enset.CabinetMedical.service.ICabinetService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -56,10 +55,10 @@ public class CabinetMedicalApplication implements CommandLineRunner {
 		c1.setDescription("description de consultation");
 		c1.setPatient(p1);
 		c1.setMedecin(m1);
-		cabinetService.addConsultation(c1);*/
+		cabinetService.addConsultation(c1);
 
         Consultation c2 = cabinetService.getConsultationById(5l);
-        System.out.println(c2.getDescription() + " " + c2.getMedecin().getNom() + " " + c2.getPatient().getNom());
+        System.out.println(c2.getDescription() + " " + c2.getMedecin().getNom() + " " + c2.getPatient().getNom());*/
 
     }
 }

@@ -7,6 +7,7 @@ import ma.enset.CabinetMedical.entities.Patient;
 import ma.enset.CabinetMedical.repositories.ConsultationRepository;
 import ma.enset.CabinetMedical.repositories.MedecinRepository;
 import ma.enset.CabinetMedical.repositories.PatientRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -16,8 +17,11 @@ import java.util.List;
 @Transactional
 @AllArgsConstructor
 public class CabinetServiceImpl implements ICabinetService {
+    @Autowired
     PatientRepository patientRepository;
+    @Autowired
     ConsultationRepository consultationRepository;
+    @Autowired
     MedecinRepository medecinRepository;
 
     @Override
@@ -26,8 +30,8 @@ public class CabinetServiceImpl implements ICabinetService {
     }
 
     @Override
-    public List<Patient> searchByQuery(String query) {
-        return null; // return patientRepository.findPatientByNomContainsOrPrenomContainsOrEmailContainsOrCinContains(query);
+    public List<Patient> searchPatientsByQuery(String query) {
+        return patientRepository.findPatientsByNomContainsOrPrenomContains(query, query);
     }
 
     @Override
@@ -43,11 +47,6 @@ public class CabinetServiceImpl implements ICabinetService {
     }
 
     @Override
-    public List<Consultation> getConsultationsByPatient(Patient patient) {
-        return null; // return consultationRepository.findConsultationByPatient(patient);
-    }
-
-    @Override
     public void addMedecin(Medecin medecin) {
         medecinRepository.save(medecin);
 
@@ -59,14 +58,14 @@ public class CabinetServiceImpl implements ICabinetService {
     }
 
     @Override
-    public void deleteMedecinById(Long id) {
-        medecinRepository.deleteById(id);
-
+    public List<Medecin> searchMedecinsByQuery(String query) {
+        return medecinRepository.findMedecinsByNomContainsOrPrenomContains(query, query);
     }
 
     @Override
-    public List<Consultation> getConsultationsByMedecin(Medecin medecin) {
-        return null; // return consultationRepository.findConsultationByMedecin(medecin);
+    public void deleteMedecinById(Long id) {
+        medecinRepository.deleteById(id);
+
     }
 
     @Override
@@ -76,13 +75,8 @@ public class CabinetServiceImpl implements ICabinetService {
     }
 
     @Override
-    public List<Consultation> getAllConsultations() {
-        return consultationRepository.findAll();
-    }
-
-    @Override
-    public void deleteConsultation(Consultation consultation) {
-        consultationRepository.delete(consultation);
+    public void deleteConsultationById(Long id) {
+        consultationRepository.deleteById(id);
 
     }
 
@@ -97,7 +91,7 @@ public class CabinetServiceImpl implements ICabinetService {
     }
 
     @Override
-    public Consultation getConsultationById(Long id) {
-        return consultationRepository.findById(id).get();
+    public List<Consultation> searchConsultationsByMedecin(String medecin_nom) {
+        return consultationRepository.findByMedecinNomContaining(medecin_nom);
     }
 }
